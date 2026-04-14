@@ -1,0 +1,13 @@
+# Keystore (never commit)
+keystore/
+
+# Local machine config
+local.properties
+
+# Build outputs
+.gradle/
+build/
+**/build/
+
+# IDE
+.idea/
