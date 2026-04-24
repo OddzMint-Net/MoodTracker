@@ -23,16 +23,6 @@ class LogMoodViewModel(
     private val _selectedMood = MutableStateFlow<Mood?>(null)
     val selectedMood: StateFlow<Mood?> = _selectedMood
 
-    private val _journalingPrompt = MutableStateFlow<String?>(null)
-    val journalingPrompt: StateFlow<String?> = _journalingPrompt
-
-    private val _isLoadingPrompt = MutableStateFlow(false)
-    val isLoadingPrompt: StateFlow<Boolean> = _isLoadingPrompt
-
-    private val _promptError = MutableStateFlow<String?>(null)
-    val promptError: StateFlow<String?> = _promptError
-
-
     fun selectMood(mood: Mood) {
         _selectedMood.value = mood
     }
@@ -51,28 +41,6 @@ class LogMoodViewModel(
             repository.saveMood(entry)
             Log.d("MoodTracker", "Saved mood: $entry")
             _selectedMood.value = null
-            // Fetch journaling prompt automatically
-            _isLoadingPrompt.value = true
-            _promptError.value = null
-            try {
-                val recentMoods = repository.getRecentMoods(3)
-                val totalEntries = recentMoods.size
-                if (totalEntries >=3 && totalEntries % 3 ==0) {
-                    Log.d("MoodTracker", "Recent moods passed to Gemini : ${recentMoods.map { it.label }}")
-                    val prompt = repository.getJournalingPrompt(mood.label, recentMoods)
-                    _journalingPrompt.value = prompt
-                } else {
-                    _journalingPrompt.value =
-                        "Keep logging your moods. After a few entries I'll be able to share personalised reflections with you."
-                }
-
-
-            } catch (e: Exception) {
-                Log.e("GeminiTest", "Error fetching prompt", e)
-                _promptError.value = "Could not load a prompt right now. Try again later."
-            } finally {
-                _isLoadingPrompt.value = false
-            }
         }
     }
 

@@ -44,13 +44,10 @@ import androidx.compose.ui.unit.sp
 import com.odwa.moodtracker.ui.theme.MoodTrackerTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.odwa.moodtracker.data.model.DefaultMoods
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import com.odwa.moodtracker.data.database.DatabaseProvider
-import com.odwa.moodtracker.data.model.Mood
-import com.odwa.moodtracker.data.remote.GeminiService
 import com.odwa.moodtracker.data.repository.MoodRepository
 import com.odwa.moodtracker.ui.components.MoodHistoryItem
 import com.odwa.moodtracker.viewmodel.LogMoodViewModel
@@ -92,14 +89,11 @@ fun LogMoodScreen(modifier: Modifier = Modifier) {
     val context = LocalContext.current
 
     val database = remember { DatabaseProvider.getDatabase(context) }
-    val repository = remember { MoodRepository(database.moodDao(), geminiService = GeminiService()) }
+    val repository = remember { MoodRepository(database.moodDao()) }
     val viewModel: LogMoodViewModel = viewModel(factory = LogMoodViewModelFactory(repository))
 
     val selectedMood by viewModel.selectedMood.collectAsState()
     val history by viewModel.moodHistory.collectAsState()
-    val journalingPrompt by viewModel.journalingPrompt.collectAsState()
-    val isLoadingPrompt by viewModel.isLoadingPrompt.collectAsState()
-    val promptError by viewModel.promptError.collectAsState()
 
     val moods = DefaultMoods
 
@@ -159,42 +153,6 @@ fun LogMoodScreen(modifier: Modifier = Modifier) {
 
         item {
             Spacer(modifier = Modifier.height(24.dp))
-            when {
-                isLoadingPrompt -> {
-                    CircularProgressIndicator(modifier = Modifier.padding(8.dp))
-                }
-
-                promptError != null -> {
-                    Text(
-                        text = promptError!!,
-                        color = MaterialTheme.colorScheme.error,
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                }
-
-                journalingPrompt != null -> {
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant
-                        )
-                    ) {
-                        Column(modifier = Modifier.padding(16.dp)) {
-                            Text(
-                                text = "Reflect on this \uD83D\uDCAD",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text(
-                                text = journalingPrompt!!,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-                }
-            }
         }
 
         item {
