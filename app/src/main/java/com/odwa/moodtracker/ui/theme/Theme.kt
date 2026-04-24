@@ -1,6 +1,5 @@
 package com.odwa.moodtracker.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -12,15 +11,33 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = primary,
+    onPrimary = MoodTitleText,
+    secondary = ContainerColor,
+    onSecondary = MoodTitleText,
+    tertiary = MoodPeach,
+    onTertiary = ScrolledContainerColor,
+    background = MoodTitleText,
+    onBackground = MoodBlueGrey,
+    surface = MoodGreen,
+    onSurface = MoodWhite,
+    outline = MoodGray
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = primary,
+    onPrimary = MoodWhite,
+    secondary = ContainerColor,
+    onSecondary = MoodTitleText,
+    tertiary = MoodOrange,
+    onTertiary = ScrolledContainerColor,
+    background = MoodWhite,
+    onBackground = MoodBlueGrey,
+    surface = MoodSurface,
+    onSurface = MoodTitleText,
+    outline = MoodOutline,
+
+
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

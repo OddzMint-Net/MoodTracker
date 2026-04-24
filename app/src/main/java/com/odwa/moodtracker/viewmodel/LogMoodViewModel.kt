@@ -6,22 +6,27 @@ import androidx.lifecycle.viewModelScope
 import com.odwa.moodtracker.data.model.Mood
 import com.odwa.moodtracker.data.model.MoodEntry
 import com.odwa.moodtracker.data.repository.MoodRepository
+import com.odwa.moodtracker.util.SupportMessageProvider
+import com.odwa.moodtracker.util.SupportMessageProvider.getLocalSupportMessage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class LogMoodViewModel(
     private val repository: MoodRepository
 ) : ViewModel() {
+    private val _supportMessage = MutableStateFlow<String?>(null)
+    val supportMessage: StateFlow<String?> = _supportMessage.asStateFlow()
+
+    private val _selectedMood = MutableStateFlow<Mood?>(null)
+    val selectedMood: StateFlow<Mood?> = _selectedMood
 
     init {
         logHistory()
     }
-
-    private val _selectedMood = MutableStateFlow<Mood?>(null)
-    val selectedMood: StateFlow<Mood?> = _selectedMood
 
     fun selectMood(mood: Mood) {
         _selectedMood.value = mood
@@ -39,7 +44,16 @@ class LogMoodViewModel(
         )
         viewModelScope.launch {
             repository.saveMood(entry)
-            Log.d("MoodTracker", "Saved mood: $entry")
+
+            _supportMessage.value = null
+
+            try {
+                val aiMessage = repository.getAiJournalingPrompt(mood.label)
+                _supportMessage.value = aiMessage
+            } catch (e: Exception) {
+                Log.e("MoodTracker", "AI prompt failed", e)
+                _supportMessage.value = SupportMessageProvider.getLocalSupportMessage(mood.label)
+            }
             _selectedMood.value = null
         }
     }

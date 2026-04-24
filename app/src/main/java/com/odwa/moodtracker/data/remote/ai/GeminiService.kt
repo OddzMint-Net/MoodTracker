@@ -1,4 +1,4 @@
-package com.odwa.moodtracker.data.remote
+package com.odwa.moodtracker.data.remote.ai
 
 import android.util.Log
 import com.odwa.moodtracker.BuildConfig
@@ -29,7 +29,7 @@ class GeminiService {
                 The user is currently feeling $moodLabel today.
                 Write one short, warm and thoughtful journaling prompt to help them reflect on their feeling.
                 Take their recent mood history into account if available.
-                Keep it to two sentences maximum. Do not use bullet points. Speak directly to the user.
+                Keep it to two sentences maximum. Do not use bullet points. Speak directly to the user and Do not ask a question.
             """.trimIndent()
 
             val requestBody = JSONObject().apply {

@@ -21,4 +21,7 @@ interface MoodDao {
 
     @Query("SELECT * FROM mood_entries ORDER BY timestamp DESC LIMIT :limit")
     suspend fun getRecentMoods(limit: Int): List<MoodEntry>
+
+    @Query("SELECT COUNT(*) FROM mood_entries")
+    suspend fun getMoodCount(): Int
 }
