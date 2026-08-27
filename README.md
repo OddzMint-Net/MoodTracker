@@ -42,5 +42,4 @@ Mood entries are stored locally on the device. The app does not use accounts, an
 
 ## ⚖️ License
 
----
 This project was created by Odwa Mtatambi.
