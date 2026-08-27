@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Mood Tracker</string>
+    <string name="app_name">Ugrand</string>
     <string name="save_button">Save Button</string>
-    <string name="log_mood">Log Mood</string>
-    <string name="mood_message">How are you feeling right now?</string>
+    <string name="log_mood">I\'m feeling…</string>
+    <string name="support_message_loading">Finding the right words for you…</string>
+    <string name="mood_message">Ugrand? Let\'s find out.</string>
     <string name="clear_history">Clear History</string>
 </resources>
