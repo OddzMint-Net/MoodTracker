@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.odwa.moodtracker.data.model.MoodEntry
+import com.odwa.moodtracker.data.database.MoodEntry
 import kotlinx.coroutines.flow.Flow
 
 @Dao

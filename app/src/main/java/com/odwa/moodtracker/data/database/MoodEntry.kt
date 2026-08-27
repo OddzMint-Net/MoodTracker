@@ -1,4 +1,4 @@
-package com.odwa.moodtracker.data.model
+package com.odwa.moodtracker.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
