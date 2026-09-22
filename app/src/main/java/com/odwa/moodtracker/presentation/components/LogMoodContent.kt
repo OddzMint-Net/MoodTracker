@@ -74,7 +74,7 @@ fun LogMoodContent(
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true, name = "Empty state")
+@Preview(showBackground = true, name = "Empty state", device = "spec:width=1080px,height=1920px,dpi=440")
 @Composable
 private fun LogMoodContentEmptyPreview() {
     MoodTrackerAppPreview {
@@ -92,7 +92,7 @@ private fun LogMoodContentEmptyPreview() {
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true, name = "Loading support message")
+@Preview(showBackground = true, name = "Loading support message",device = "spec:width=1080px,height=1920px,dpi=440")
 @Composable
 private fun LogMoodContentLoadingPreview() {
     MoodTrackerAppPreview {
@@ -110,7 +110,7 @@ private fun LogMoodContentLoadingPreview() {
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true, name = "Full - message and history")
+@Preview(showBackground = true, name = "Full - message and history",device = "spec:width=1080px,height=1920px,dpi=440")
 @Composable
 private fun LogMoodContentFullPreview() {
     val now = System.currentTimeMillis()
@@ -137,7 +137,7 @@ private fun LogMoodContentFullPreview() {
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true, name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES,device = "spec:width=1080px,height=1920px,dpi=440")
 @Composable
 private fun LogMoodContentDarkPreview() {
     val now = System.currentTimeMillis()
