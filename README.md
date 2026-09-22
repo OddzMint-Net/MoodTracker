@@ -3,6 +3,13 @@
 Ugrand? (formerly MoodTracker) is a Jetpack Compose Android app that helps users log their mood, reflect on their emotions, and receive AI-powered journaling prompts — built as a demonstration of production-grade Android architecture.
 
 ---
+## 📱 Screenshots
+### Screen
+![Action](screenshots/screen1.png)
+![Action](screenshots/screen2.png)
+![Action](screenshots/screen3.png)
+![Action](screenshots/screen4.png)
+
 ## ✨ Features
 
 - Log moods with emoji-based mood selection
