@@ -1,5 +1,7 @@
 package com.odwa.moodtracker.domain
 
+import com.odwa.moodtracker.domain.model.Mood
+
 interface SupportMessageProvider {
-    fun getLocalSupportMessage(moodLabel: String): String
+    fun getLocalSupportMessage(mood: Mood): String
 }

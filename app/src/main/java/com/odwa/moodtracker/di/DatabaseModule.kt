@@ -20,7 +20,9 @@ object DatabaseModule {
     fun provideMoodDatabase(@ApplicationContext context: Context): MoodDatabase {
         return Room.databaseBuilder(
             context, MoodDatabase::class.java, "mood_tracker_db"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides

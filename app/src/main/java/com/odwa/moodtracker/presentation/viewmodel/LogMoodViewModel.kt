@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.odwa.moodtracker.domain.SupportMessageProvider
 import com.odwa.moodtracker.domain.model.LoggedMood
-import com.odwa.moodtracker.domain.model.MoodOption
+import com.odwa.moodtracker.domain.model.Mood
 import com.odwa.moodtracker.domain.repository.MoodRepository
 import com.odwa.moodtracker.domain.usecase.GetJournalingPromptUseCase
 import com.odwa.moodtracker.domain.usecase.LogMoodUseCase
@@ -30,25 +30,30 @@ class LogMoodViewModel @Inject constructor(
     val supportMessage: StateFlow<String?> = _supportMessage.asStateFlow()
     private val _isLoadingSupportMessage = MutableStateFlow(false)
     val isLoadingSupportMessage: StateFlow<Boolean> = _isLoadingSupportMessage.asStateFlow()
-    private val _selectedMood = MutableStateFlow<MoodOption?>(null)
-    val selectedMood: StateFlow<MoodOption?> = _selectedMood.asStateFlow()
+    private val _selectedMood = MutableStateFlow<Mood?>(null)
+    val selectedMood: StateFlow<Mood?> = _selectedMood.asStateFlow()
     val moodHistory: StateFlow<List<LoggedMood>> = moodRepository.getAllMoodHistory()
         .stateIn(scope = viewModelScope, started = SharingStarted.WhileSubscribed(5_000), initialValue = emptyList())
 
-    fun selectMood(moodOption: MoodOption) {
-        _selectedMood.value = moodOption
+    private val _moodForSupportMessage = MutableStateFlow<Mood?>(null)
+    val moodForSupportMessage: StateFlow<Mood?> = _moodForSupportMessage.asStateFlow()
+
+    fun selectMood(mood: Mood) {
+        _selectedMood.value = mood
     }
 
     fun saveMood() {
-        val moodOption = _selectedMood.value ?: return
+        val mood = _selectedMood.value ?: return
         viewModelScope.launch {
-            logMoodUseCase(moodOption)
+            logMoodUseCase(mood)
             _supportMessage.value = null
+            _moodForSupportMessage.value = mood
             _isLoadingSupportMessage.value = true
-            getJournalingPromptUseCase(moodOption.label)
+            getJournalingPromptUseCase(mood)
                 .onSuccess { prompt -> _supportMessage.value = prompt }
                 .onFailure {
-                    _supportMessage.value = supportMessageProvider.getLocalSupportMessage(moodOption.label) }
+                    _supportMessage.value = supportMessageProvider.getLocalSupportMessage(mood)
+                }
             _isLoadingSupportMessage.value = false
             _selectedMood.value = null
         }

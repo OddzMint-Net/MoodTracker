@@ -3,16 +3,14 @@ package com.odwa.moodtracker.data.mapper
 import com.odwa.moodtracker.data.database.MoodEntry
 import com.odwa.moodtracker.domain.model.LoggedMood
 
-fun MoodEntry.toDomain(): LoggedMood = LoggedMood(
+fun LoggedMood.toEntity(): MoodEntry = MoodEntry(
     id = id,
-    emoji = emoji,
-    label = label,
+    mood = mood,
     timestamp = timestamp
 )
 
-fun LoggedMood.toEntity(): MoodEntry = MoodEntry(
+fun MoodEntry.toDomain(): LoggedMood = LoggedMood(
     id = id,
-    emoji = emoji,
-    label = label,
+    mood = mood,
     timestamp = timestamp
 )

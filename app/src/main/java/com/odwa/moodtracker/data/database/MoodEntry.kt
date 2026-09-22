@@ -2,12 +2,12 @@ package com.odwa.moodtracker.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.odwa.moodtracker.domain.model.Mood
 
 @Entity(tableName = "mood_entries")
 data class MoodEntry(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val emoji: String,
-    val label: String,
+    val mood: Mood,
     val timestamp: Long
 )

@@ -1,8 +1,21 @@
 <resources>
-    <string name="app_name">Ugrand</string>
+    <string name="app_name">UGRAND</string>
+    <string name="app_name_title">Ugrand?</string>
     <string name="save_button">Save Button</string>
     <string name="log_mood">I\'m feeling…</string>
+    <string name="last_checks">Last 5 check-ins</string>
+    <string name="check_in_message">A quick, honest check-in - no streaks to keep, just what\'s true right now.</string>
     <string name="support_message_loading">Finding the right words for you…</string>
     <string name="mood_message">Ugrand? Let\'s find out.</string>
     <string name="clear_history">Clear History</string>
+    <string name="happy_mood">Happy</string>
+    <string name="neutral_mood">Neutral</string>
+    <string name="sad_mood">Sad</string>
+    <string name="angry_mood">Angry</string>
+    <string name="brand_initial">U</string>
+    <string name="mood_line">Let\'s find out.</string>
+    <string name="reading_mood">Reading %1$s</string>
+    <string name="reading_generic">Reading your mood</string>
+    <string name="history_empty">history empty</string>
+
 </resources>

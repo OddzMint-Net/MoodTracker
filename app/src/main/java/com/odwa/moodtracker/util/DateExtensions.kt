@@ -10,9 +10,20 @@ import java.time.format.DateTimeFormatter
 private val dateTimeFormatter = DateTimeFormatter.ofPattern("EE,dd MMM • HH:mm")
 
 @RequiresApi(Build.VERSION_CODES.O)
+private val shortDayFormatter = DateTimeFormatter.ofPattern("EEE")
+
+@RequiresApi(Build.VERSION_CODES.O)
 fun Long.toReadableDateTime(): String {
     return Instant.ofEpochMilli(this)
         .atZone(ZoneId.systemDefault())
         .toLocalDateTime()
         .format(dateTimeFormatter)
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun Long.toShortDayLabel(): String {
+    return Instant.ofEpochMilli(this)
+        .atZone(ZoneId.systemDefault())
+        .toLocalDateTime()
+        .format(shortDayFormatter)
 }
