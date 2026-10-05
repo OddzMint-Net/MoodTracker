@@ -12,12 +12,20 @@ plugins {
 val localProps = Properties().apply {
     val file = rootProject.file("local.properties")
     if (file.exists()) {
-        load(file.inputStream())
+        file.inputStream().use { load(it) }
     }
 }
 
-fun prop(key: String): String =
-    localProps.getProperty(key)?: error("Missing property: $key in local.properties")
+fun prop(key: String): String? =
+    localProps.getProperty(key)?.takeIf { it.isNotBlank() }
+        ?: System.getenv(key)?.takeIf { it.isNotBlank() }
+
+val hasReleaseSigning = listOf(
+    "RELEASE_STORE_FILE",
+    "RELEASE_STORE_PASSWORD",
+    "RELEASE_KEY_ALIAS",
+    "RELEASE_KEY_PASSWORD"
+).all { prop(it) != null }
 
 android {
     namespace = "com.odwa.moodtracker"
@@ -38,16 +46,18 @@ android {
         buildConfigField(
             "String",
             "GEMINI_API_KEY",
-            "\"${localProps.getProperty("GEMINI_API_KEY")}\""
+            "\"${prop("GEMINI_API_KEY") ?: ""}\""
         )
     }
 
     signingConfigs {
-        create("release") {
-            storeFile = file(prop("RELEASE_STORE_FILE"))
-            storePassword = prop("RELEASE_STORE_PASSWORD")
-            keyAlias = prop("RELEASE_KEY_ALIAS")
-            keyPassword = prop("RELEASE_KEY_PASSWORD")
+        if (hasReleaseSigning) {
+            create("release") {
+                storeFile = file(prop("RELEASE_STORE_FILE")!!)
+                storePassword = prop("RELEASE_STORE_PASSWORD")
+                keyAlias = prop("RELEASE_KEY_ALIAS")
+                keyPassword = prop("RELEASE_KEY_PASSWORD")
+            }
         }
     }
 
@@ -62,7 +72,9 @@ android {
         }
         release {
             isDebuggable = false
-            signingConfig = signingConfigs.getByName("release")
+            if (hasReleaseSigning) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
@@ -87,7 +99,6 @@ android {
 dependencies {
 
     implementation("androidx.core:core-ktx:1.17.0")
-
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
 
