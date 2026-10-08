@@ -14,8 +14,6 @@ fun MoodTrackerAppPreview(content: @Composable () -> Unit) {
     MoodTrackerTheme(dynamicColor = false) {
         Surface(
             color = MaterialTheme.colorScheme.background
-        ) {
-            content()
-        }
+        ) { content() }
     }
 }
