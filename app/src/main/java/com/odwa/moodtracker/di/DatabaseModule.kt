@@ -6,6 +6,8 @@ package com.odwa.moodtracker.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.odwa.moodtracker.data.dao.MoodDao
 import com.odwa.moodtracker.data.database.MoodDatabase
 import dagger.Module
@@ -19,12 +21,19 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
+    private val MIGRATION_2_3 = object : Migration(2, 3) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE mood_entries ADD COLUMN customText TEXT")
+        }
+    }
+
     @Provides
     @Singleton
     fun provideMoodDatabase(@ApplicationContext context: Context): MoodDatabase {
         return Room.databaseBuilder(
             context, MoodDatabase::class.java, "mood_tracker_db"
         )
+            .addMigrations(MIGRATION_2_3)
             .fallbackToDestructiveMigration()
             .build()
     }

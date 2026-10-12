@@ -29,7 +29,10 @@ fun LogMoodContent(
     selectedMood: Mood?,
     moodForSupportMessage: Mood?,
     history: List<LoggedMood>,
+    customText: String,
     onMoodSelected: (Mood) -> Unit,
+    onCustomTextChange: (String) -> Unit,
+    onSendCustom: () -> Unit,
     onSaveMood: () -> Unit,
     onClearHistory: () -> Unit,
     supportMessage: String?,
@@ -47,18 +50,17 @@ fun LogMoodContent(
         item { Headline() }
         item {
             MoodPicker(
-                moods = Mood.entries,
+                moods = Mood.entries.filter { it != Mood.CUSTOM },
                 selectedMood = selectedMood,
                 onMoodSelected = onMoodSelected
             )
         }
 
         item {
-            MoodButton(
-                text = stringResource(R.string.log_mood),
-                onClick = onSaveMood,
-                enabled = selectedMood != null,
-                icon = Icons.Outlined.Edit
+            CustomFeelingField(
+                text = customText,
+                onTextChange = onCustomTextChange,
+                onSend = onSendCustom
             )
         }
 
@@ -90,13 +92,16 @@ private fun LogMoodContentEmptyPreview() {
             onSaveMood = {},
             onClearHistory = {},
             supportMessage = null,
-            isLoadingSupportMessage = false
+            isLoadingSupportMessage = false,
+            onSendCustom = {},
+            onCustomTextChange = {},
+            customText = ""
         )
     }
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true, name = "Loading support message",device = "spec:width=1080px,height=1920px,dpi=440")
+@Preview(showBackground = true, name = "Loading support message", device = "spec:width=1080px,height=1920px,dpi=440")
 @Composable
 private fun LogMoodContentLoadingPreview() {
     MoodTrackerAppPreview {
@@ -108,13 +113,16 @@ private fun LogMoodContentLoadingPreview() {
             onSaveMood = {},
             onClearHistory = {},
             supportMessage = null,
-            isLoadingSupportMessage = true
+            isLoadingSupportMessage = true,
+            onSendCustom = {},
+            onCustomTextChange = {},
+            customText = ""
         )
     }
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true, name = "Full - message and history",device = "spec:width=1080px,height=1920px,dpi=440")
+@Preview(showBackground = true, name = "Full - message and history", device = "spec:width=1080px,height=1920px,dpi=440")
 @Composable
 private fun LogMoodContentFullPreview() {
     val now = System.currentTimeMillis()
@@ -135,13 +143,21 @@ private fun LogMoodContentFullPreview() {
             onSaveMood = {},
             onClearHistory = {},
             supportMessage = "Steady is worth noticing too. Nothing's pulling hard in either direction right now - want to log what's keeping it even?",
-            isLoadingSupportMessage = false
+            isLoadingSupportMessage = false,
+            onSendCustom = {},
+            onCustomTextChange = {},
+            customText = ""
         )
     }
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true, name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES,device = "spec:width=1080px,height=1920px,dpi=440")
+@Preview(
+    showBackground = true,
+    name = "Dark",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    device = "spec:width=1080px,height=1920px,dpi=440"
+)
 @Composable
 private fun LogMoodContentDarkPreview() {
     val now = System.currentTimeMillis()
@@ -159,7 +175,10 @@ private fun LogMoodContentDarkPreview() {
             onSaveMood = {},
             onClearHistory = {},
             supportMessage = "Feeling low is worth sitting with, not fixing right away.",
-            isLoadingSupportMessage = false
+            isLoadingSupportMessage = false,
+            onSendCustom = {},
+            onCustomTextChange = {},
+            customText = ""
         )
     }
 }

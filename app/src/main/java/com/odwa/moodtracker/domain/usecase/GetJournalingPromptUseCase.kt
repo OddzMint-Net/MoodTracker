@@ -14,9 +14,9 @@ class GetJournalingPromptUseCase @Inject constructor(
     private val aiPromptRepository: AiPromptRepository
 ) {
 
-    suspend operator fun invoke(mood: Mood): Result<String> {
+    suspend operator fun invoke(mood: Mood, customText: String? = null): Result<String> {
         val recentMoods = moodRepository.getRecentMoods(limit = 5)
         val recentMoodValues = recentMoods.map { it.mood }
-        return aiPromptRepository.getJournalingPrompt(mood, recentMoodValues)
+        return aiPromptRepository.getJournalingPrompt(mood, recentMoodValues,customText)
     }
 }

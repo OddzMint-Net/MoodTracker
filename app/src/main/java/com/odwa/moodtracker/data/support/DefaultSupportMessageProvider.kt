@@ -15,6 +15,7 @@ class DefaultSupportMessageProvider @Inject constructor() : SupportMessageProvid
             Mood.SAD -> "You showed up and logged how you feel. That already matters."
             Mood.ANGRY -> "Pause for a moment. Your feeling is valid, but it does not have to control your next step."
             Mood.NEUTRAL -> "Not every day needs to be dramatic. It's okay to just be."
+            Mood.CUSTOM -> "Thank you for putting that into words. Noticing what you feel is a good first step."
         }
     }
 }

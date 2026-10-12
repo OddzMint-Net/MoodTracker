@@ -17,5 +17,8 @@
     <string name="reading_mood">Reading %1$s</string>
     <string name="reading_generic">Reading your mood</string>
     <string name="history_empty">history empty</string>
+    <string name="custom_text">custom text</string>
+    <string name="custom_feeling_hint">I\'m feeling…</string>
+    <string name="custom_feeling_send">Send</string>
 
 </resources>

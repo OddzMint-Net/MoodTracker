@@ -13,5 +13,6 @@ data class MoodEntry(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val mood: Mood,
+    val customText: String? = null,
     val timestamp: Long
 )

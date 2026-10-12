@@ -7,5 +7,6 @@ package com.odwa.moodtracker.domain.model
 data class LoggedMood(
     val id: Long = 0,
     val mood: Mood,
+    val customText: String? = null,
     val timestamp: Long
 )
