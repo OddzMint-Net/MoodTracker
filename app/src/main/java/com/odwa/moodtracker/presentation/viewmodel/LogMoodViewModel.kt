@@ -13,6 +13,8 @@ import com.odwa.moodtracker.domain.repository.MoodRepository
 import com.odwa.moodtracker.domain.usecase.GetJournalingPromptUseCase
 import com.odwa.moodtracker.domain.usecase.LogMoodUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -41,9 +43,42 @@ class LogMoodViewModel @Inject constructor(
 
     private val _moodForSupportMessage = MutableStateFlow<Mood?>(null)
     val moodForSupportMessage: StateFlow<Mood?> = _moodForSupportMessage.asStateFlow()
+    private val _customText = MutableStateFlow("")
+    val customText: StateFlow<String> = _customText.asStateFlow()
+
+    private var messageJob: Job? = null
 
     fun selectMood(mood: Mood) {
         _selectedMood.value = mood
+        requestSupportMessage(mood = mood)
+    }
+
+    fun onCustomTextChange(value: String) {
+        _customText.value = value.take(140)
+    }
+
+    fun onSendCustom() {
+        val text = _customText.value.trim()
+        if (text.isEmpty()) return
+        _selectedMood.value = null
+        _customText.value = ""
+        requestSupportMessage(mood = Mood.CUSTOM, customText = text)
+    }
+
+    private fun requestSupportMessage(mood: Mood, customText: String? = null) {
+        messageJob?.cancel()
+        messageJob = viewModelScope.launch {
+            _supportMessage.value = null
+            _moodForSupportMessage.value = mood
+            _isLoadingSupportMessage.value = true
+
+            val message = getJournalingPromptUseCase(mood, customText)
+                .getOrElse { supportMessageProvider.getLocalSupportMessage(mood) }
+            ensureActive()
+            logMoodUseCase(mood, customText)
+            _supportMessage.value = message
+            _isLoadingSupportMessage.value = false
+        }
     }
 
     fun saveMood() {

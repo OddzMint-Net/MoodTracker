@@ -12,6 +12,7 @@ import com.odwa.moodtracker.ui.theme.MoodAngry
 import com.odwa.moodtracker.ui.theme.MoodHappy
 import com.odwa.moodtracker.ui.theme.MoodNeutral
 import com.odwa.moodtracker.ui.theme.MoodSad
+import com.odwa.moodtracker.ui.theme.Slate
 
 @get:StringRes
 val Mood.labelRes: Int
@@ -20,6 +21,7 @@ val Mood.labelRes: Int
         Mood.NEUTRAL -> R.string.neutral_mood
         Mood.SAD -> R.string.sad_mood
         Mood.ANGRY -> R.string.angry_mood
+        Mood.CUSTOM -> R.string.custom_text
     }
 
 val Mood.accent: Color
@@ -28,4 +30,5 @@ val Mood.accent: Color
         Mood.NEUTRAL -> MoodNeutral
         Mood.SAD -> MoodSad
         Mood.ANGRY -> MoodAngry
+        Mood.CUSTOM -> Slate
     }

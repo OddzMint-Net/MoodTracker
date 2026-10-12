@@ -12,9 +12,10 @@ import javax.inject.Inject
 class LogMoodUseCase @Inject constructor(
     private val moodRepository: MoodRepository
 ) {
-    suspend operator fun invoke(mood: Mood) {
+    suspend operator fun invoke(mood: Mood, customText: String? = null) {
         val loggedMood = LoggedMood(
             mood = mood,
+            customText = customText,
             timestamp = System.currentTimeMillis()
         )
         moodRepository.savedMood(loggedMood)

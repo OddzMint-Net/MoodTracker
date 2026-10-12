@@ -11,7 +11,7 @@ import com.odwa.moodtracker.data.dao.MoodDao
 
 @Database(
     entities = [MoodEntry::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(MoodConverters::class)

@@ -17,7 +17,8 @@ import javax.inject.Inject
 
 class GeminiRemoteDataSource @Inject constructor() {
 
-    suspend fun getJournalingPrompt(mood: Mood, recentMoods: List<Mood>): String {
+
+    suspend fun getJournalingPrompt(mood: Mood, recentMoods: List<Mood>, customText: String? = null): String {
         return withContext(Dispatchers.IO) {
             val apiKey = BuildConfig.GEMINI_API_KEY
             val url =
@@ -28,12 +29,32 @@ class GeminiRemoteDataSource @Inject constructor() {
                 ""
             }
 
+            val instruction: String
+            val currentFeeling: String
+
+            if (customText != null) {
+                currentFeeling =
+                    "The user describes how they are feeling right now in their own words: \"$customText\"."
+                instruction = """
+                    Respond directly to what they wrote with a short, warm, supportive reflection,
+        then offer one gentle journaling prompt related to it.
+        Three sentences maximum. Do not use bullet points.
+        Do not diagnose or give medical advice.
+                """.trimIndent()
+            } else {
+                currentFeeling = "The user is currently feeling ${mood.promptLabel} today."
+                instruction = """
+                    Write one short, warm and thoughtful journaling prompt to help them reflect on their feeling.
+        Keep it to two sentences maximum. Do not use bullet points.
+        Speak directly to the user and do not ask a question.
+                """.trimIndent()
+            }
+
             val prompt = """
                 $moodHistory
-                The user is currently feeling ${mood.promptLabel} today.
-                Write one short, warm and thoughtful journaling prompt to help them reflect on their feeling.
+                $currentFeeling
                 Take their recent mood history into account if available.
-                Keep it to two sentences maximum. Do not use bullet points. Speak directly to the user and Do not ask a question.
+                $instruction
             """.trimIndent()
 
             val requestBody = JSONObject().apply {
@@ -89,4 +110,5 @@ private val Mood.promptLabel: String
         Mood.NEUTRAL -> "neutral"
         Mood.SAD -> "sad"
         Mood.ANGRY -> "angry"
+        Mood.CUSTOM -> "something you put into own words"
     }

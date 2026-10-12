@@ -62,7 +62,8 @@ fun SupportCard(
         )
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text(
-                text = mood?.let { stringResource(R.string.reading_mood, stringResource(it.labelRes)) }
+                text = mood?.takeIf { it != Mood.CUSTOM }
+                    ?.let { stringResource(R.string.reading_mood, stringResource(it.labelRes)) }
                     ?: stringResource(R.string.reading_generic),
                 style = MaterialTheme.typography.labelSmall,
                 fontWeight = FontWeight.Bold,
