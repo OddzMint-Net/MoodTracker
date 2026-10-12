@@ -24,15 +24,18 @@ fun LogMoodScreen(
     val history by viewModel.moodHistory.collectAsState()
     val supportMessage by viewModel.supportMessage.collectAsState()
     val isLoadingSupportMessage by viewModel.isLoadingSupportMessage.collectAsState()
+    val customText by viewModel.customText.collectAsState()
 
     LogMoodContent(
         selectedMood = selectedMood,
         moodForSupportMessage = moodForSupportMessage,
         history = history,
+        customText = customText,
         supportMessage = supportMessage,
         isLoadingSupportMessage = isLoadingSupportMessage,
         onMoodSelected = viewModel::selectMood,
-        onSaveMood = viewModel::saveMood,
+        onCustomTextChange = viewModel::onCustomTextChange,
+        onSendCustom = viewModel::onSendCustom,
         onClearHistory = viewModel::clearHistory,
         modifier = modifier
     )
