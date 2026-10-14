@@ -8,11 +8,10 @@ import android.content.res.Configuration
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -48,32 +47,38 @@ fun LogMoodContent(
         item { BrandRow() }
         item { Headline() }
         item {
-            MoodPicker(
-                moods = Mood.entries.filter { it != Mood.CUSTOM },
-                selectedMood = selectedMood,
-                onMoodSelected = onMoodSelected
-            )
-        }
 
-        item {
-            CustomFeelingField(
-                text = customText,
-                onTextChange = onCustomTextChange,
-                onSend = onSendCustom
-            )
-        }
-
-        when {
-            isLoadingSupportMessage -> item { SupportLoading() }
-            supportMessage != null -> item {
-                SupportCard(mood = moodForSupportMessage, message = supportMessage)
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                SectionLabel(stringResource(R.string.tap_how_feeling))
+                MoodPicker(
+                    moods = Mood.entries.filter { it != Mood.CUSTOM },
+                    selectedMood = selectedMood,
+                    onMoodSelected = onMoodSelected
+                )
             }
         }
+
         item {
-            HistorySection(
-                history = history,
-                onClearHistory = onClearHistory
+            ReadingCard(
+                mood = moodForSupportMessage,
+                message = supportMessage,
+                isLoading = isLoadingSupportMessage
             )
+        }
+
+        item {
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                SectionLabel(stringResource(R.string.custom_feeling_label))
+                CustomFeelingField(
+                    text = customText,
+                    onTextChange = onCustomTextChange,
+                    onSend = onSendCustom
+                )
+            }
+        }
+
+        item {
+            HistorySection(history = history, onClearHistory = onClearHistory)
         }
     }
 }

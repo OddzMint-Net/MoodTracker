@@ -6,13 +6,25 @@ package com.odwa.moodtracker.presentation.components
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Clear
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -52,11 +64,22 @@ fun HistorySection(
                 color = colors.onSurface
             )
             if (recent.isNotEmpty()) {
-                TextButton(onClick = onClearHistory) {
+                OutlinedButton(
+                    onClick = onClearHistory,
+                    shape = RoundedCornerShape(12.dp),
+                    border = BorderStroke(1.dp, colors.outlineVariant),
+                    colors = ButtonDefaults.outlinedButtonColors(contentColor = colors.primary),
+                    contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Delete,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(6.dp))
                     Text(
                         text = stringResource(R.string.clear_history),
-                        style = MaterialTheme.typography.labelLarge,
-                        color = colors.primary
+                        style = MaterialTheme.typography.labelLarge
                     )
                 }
             }
