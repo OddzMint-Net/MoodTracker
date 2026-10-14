@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.odwa.moodtracker.R
@@ -97,7 +98,8 @@ fun ReadingCard(
             else -> Text(
                 text = stringResource(R.string.reading_empty),
                 style = MaterialTheme.typography.bodyLarge,
-                color = colors.onSurfaceVariant
+                fontStyle = FontStyle.Italic,
+                color = colors.onSurfaceVariant.copy(alpha = 0.7f)
             )
         }
     }

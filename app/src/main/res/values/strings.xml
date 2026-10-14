@@ -13,7 +13,7 @@
     <string name="angry_mood">Angry</string>
     <string name="brand_initial">U</string>
     <string name="mood_line">Let\'s find out.</string>
-    <string name="reading_mood">Reading %1$s</string>
+    <string name="reading_mood">Reading %1$s feeling</string>
     <string name="reading_generic">Reading your mood</string>
     <string name="history_empty">history empty</string>
     <string name="custom_text">custom text</string>
