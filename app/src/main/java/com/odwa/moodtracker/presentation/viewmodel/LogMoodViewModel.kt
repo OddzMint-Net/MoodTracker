@@ -78,6 +78,7 @@ class LogMoodViewModel @Inject constructor(
             logMoodUseCase(mood, customText)
             _supportMessage.value = message
             _isLoadingSupportMessage.value = false
+            _selectedMood.value = null
         }
     }
 

@@ -49,7 +49,7 @@ fun MoodPicker(
         modifier = modifier
             .fillMaxSize()
             .selectableGroup(),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         moods.forEach { mood ->
             MoodCard(
@@ -94,7 +94,7 @@ private fun MoodCard(
                 role = Role.RadioButton,
                 onClick = onClick
             )
-            .padding(vertical = 14.dp, horizontal = 6.dp)
+            .padding(vertical = 14.dp, horizontal = 4.dp)
             .clearAndSetSemantics { contentDescription = label }
     ) {
         Box(
@@ -105,9 +105,10 @@ private fun MoodCard(
         )
         Text(
             text = label,
-            style = MaterialTheme.typography.labelLarge,
-            color = colors.onSurface,
+            style = MaterialTheme.typography.labelMedium,
+            color = if (selected) colors.onPrimary else colors.onSurface,
             maxLines = 1,
+            softWrap = false,
             textAlign = TextAlign.Center
         )
     }
