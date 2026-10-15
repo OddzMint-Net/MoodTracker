@@ -26,21 +26,33 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun OnboardingScreen(viewModel: OnBoardingViewModel = hiltViewModel()) {
+    OnboardingContent(onFinish = { viewModel.onEvent(OnBoardingEvent.Complete) })
+}
+
+@Composable
+fun OnboardingContent(
+    onFinish: () -> Unit,
+    modifier: Modifier = Modifier,
+    initialPage: Int = 0
+) {
     val colors = MaterialTheme.colorScheme
-    val pagerState = rememberPagerState(pageCount = { onboardingPages.size })
+    val pagerState = rememberPagerState(
+        initialPage = initialPage,
+        pageCount = { onboardingPages.size })
     val scope = rememberCoroutineScope()
 
     val currentPage = pagerState.currentPage
     val isFirst = currentPage == 0
     val isLast = currentPage == onboardingPages.lastIndex
 
-    fun finish() = viewModel.onEvent(OnBoardingEvent.Complete)
-    fun goTo(page: Int) { scope.launch { pagerState.animateScrollToPage(page) } }
+    fun goTo(page: Int) {
+        scope.launch { pagerState.animateScrollToPage(page) }
+    }
 
     BackHandler(enabled = !isFirst) { goTo(currentPage - 1) }
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(colors.background)
             .statusBarsPadding()
@@ -56,7 +68,7 @@ fun OnboardingScreen(viewModel: OnBoardingViewModel = hiltViewModel()) {
         ) {
             BrandRow()
             if (!isLast) {
-                TextButton(onClick = ::finish) {
+                TextButton(onClick = onFinish) {
                     Text(stringResource(R.string.onboarding_skip))
                 }
             }
@@ -90,7 +102,7 @@ fun OnboardingScreen(viewModel: OnBoardingViewModel = hiltViewModel()) {
                     }
                 }
                 Button(
-                    onClick = { if (isLast) finish() else goTo(currentPage + 1) },
+                    onClick = { if (isLast) onFinish() else goTo(currentPage + 1) },
                     shape = RoundedCornerShape(14.dp)
                 ) {
                     Text(
