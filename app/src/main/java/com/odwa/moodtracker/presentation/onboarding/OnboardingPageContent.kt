@@ -1,5 +1,6 @@
 package com.odwa.moodtracker.presentation.onboarding
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,7 +21,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.odwa.moodtracker.ui.theme.MoodTrackerTheme
 
 @Composable
 fun OnboardingPageContent(page: OnboardingPage) {
@@ -68,5 +71,43 @@ fun OnboardingPageContent(page: OnboardingPage) {
             style = MaterialTheme.typography.bodyLarge,
             color = colors.onSurfaceVariant
         )
+    }
+}
+
+@Preview(name = "Page 1", showBackground = true, widthDp = 360, heightDp = 640)
+@Composable
+private fun OnboardingPage1Preview() {
+    MoodTrackerTheme(dynamicColor = false) {
+        Box(Modifier.padding(24.dp)) { OnboardingPageContent(onboardingPages[0]) }
+    }
+}
+
+@Preview(name = "Page 2", showBackground = true, widthDp = 360, heightDp = 640)
+@Composable
+private fun OnboardingPage2Preview() {
+    MoodTrackerTheme(dynamicColor = false) {
+        Box(Modifier.padding(24.dp)) { OnboardingPageContent(onboardingPages[1]) }
+    }
+}
+
+@Preview(name = "Page 3", showBackground = true, widthDp = 360, heightDp = 640)
+@Composable
+private fun OnboardingPage3Preview() {
+    MoodTrackerTheme(dynamicColor = false) {
+        Box(Modifier.padding(24.dp)) { OnboardingPageContent(onboardingPages[2]) }
+    }
+}
+
+@Preview(
+    name = "Page 2 - dark",
+    showBackground = true,
+    widthDp = 360,
+    heightDp = 640,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+private fun OnboardingPageDarkPreview() {
+    MoodTrackerTheme(dynamicColor = false) {
+        Box(Modifier.padding(24.dp)) { OnboardingPageContent(onboardingPages[1]) }
     }
 }
