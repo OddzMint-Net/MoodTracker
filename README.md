@@ -8,7 +8,9 @@ Ugrand? (formerly MoodTracker) is a Jetpack Compose Android app that helps users
 ![Action](screenshots/screen1.png)
 ![Action](screenshots/screen2.png)
 ![Action](screenshots/screen3.png)
-![Action](screenshots/screen4.png)
+![Action](screenshots/screenA.png)
+![Action](screenshots/ScreenB.png)
+![Action](screenshots/ScreenC.png)
 
 ## ✨ Features
 
