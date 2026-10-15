@@ -34,6 +34,7 @@ object DatabaseModule {
             context, MoodDatabase::class.java, "mood_tracker_db"
         )
             .addMigrations(MIGRATION_2_3)
+            .fallbackToDestructiveMigrationFrom(true,1)
             .build()
     }
 
