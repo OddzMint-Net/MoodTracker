@@ -23,5 +23,21 @@
     <string name="tap_how_feeling">Tap how you\'re feeling</string>
     <string name="custom_feeling_label">None of these fit? Say it in your own words (optional)</string>
     <string name="clear_history">Clear</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_get_started">Get started</string>
+
+    <string name="onboarding_title_1">Ugrand?</string>
+    <string name="onboarding_accent_1">Let\'s find out.</string>
+    <string name="onboarding_body_1">A quick, honest check-in on how you\'re really doing. It takes one tap.</string>
+
+    <string name="onboarding_title_2">Tap a mood. Get a reading.</string>
+    <string name="onboarding_body_2">Pick how you feel and a short, thoughtful reflection appears right away. Nothing to fill in. If none of the four fit, you can type it in your own words.</string>
+    <string name="onboarding_sample_reading">Steady is worth noticing too. Nothing\'s pulling hard in either direction right now.</string>
+
+    <string name="onboarding_title_3">No streaks. No pressure.</string>
+    <string name="onboarding_body_3">Your last five check-ins sit below the reading, so you can notice patterns at your own pace. Clear them whenever you like.</string>
+    <string name="onboarding_history_caption">Your last 5 check-ins</string>
+    <string name="onboarding_back">Back</string>
 
 </resources>

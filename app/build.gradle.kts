@@ -29,11 +29,11 @@ val hasReleaseSigning = listOf(
 
 android {
     namespace = "com.odwa.moodtracker"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.odwa.moodtracker"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         val major = 1
         val minor = 1
@@ -109,6 +109,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.foundation:foundation")
     testImplementation("junit:junit:4.13.2")
 
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
