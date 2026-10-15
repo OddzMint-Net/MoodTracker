@@ -1,8 +1,7 @@
 package com.odwa.moodtracker.presentation.onboarding
 
-import android.os.Build
+import android.content.res.Configuration
 import androidx.activity.compose.BackHandler
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
@@ -17,11 +16,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.odwa.moodtracker.R
 import com.odwa.moodtracker.presentation.components.BrandRow
 import com.odwa.moodtracker.presentation.viewmodel.OnBoardingViewModel
+import com.odwa.moodtracker.ui.theme.MoodTrackerTheme
 import kotlinx.coroutines.launch
 
 @Composable
@@ -114,5 +115,67 @@ fun OnboardingContent(
                 }
             }
         }
+    }
+}
+
+@Preview(name = "Page 1", showBackground = true)
+@Composable
+private fun OnboardingPage1Preview() {
+    MoodTrackerTheme(dynamicColor = false) {
+        Box(Modifier.padding(24.dp)) {
+            OnboardingPageContent(onboardingPages[0])
+        }
+    }
+}
+
+@Preview(name = "Page 2", showBackground = true)
+@Composable
+private fun OnboardingPage2Preview() {
+    MoodTrackerTheme(dynamicColor = false) {
+        Box(Modifier.padding(24.dp)) {
+            OnboardingPageContent(onboardingPages[1])
+        }
+    }
+}
+
+@Preview(name = "Page 2", showBackground = true)
+@Composable
+private fun OnboardingPage3Preview() {
+    MoodTrackerTheme(dynamicColor = false) {
+        Box(Modifier.padding(24.dp)) {
+            OnboardingPageContent(onboardingPages[2])
+        }
+    }
+}
+
+@Preview(name = " Screen - page 1", showBackground = true, showSystemUi = true)
+@Composable
+private fun OnboardingScreenFirstPreview() {
+    MoodTrackerTheme(dynamicColor = false) {
+        OnboardingContent(onFinish = {}, initialPage = 0)
+    }
+}
+
+@Preview(name = "Screen -page 2", showBackground = true, showSystemUi = true)
+@Composable
+private fun OnboardingScreenMiddlePreview() {
+    MoodTrackerTheme(dynamicColor = false) {
+        OnboardingContent(onFinish = {}, initialPage = 1)
+    }
+}
+
+@Preview(name = "Screen - page 3", showBackground = true, showSystemUi = true)
+@Composable
+private fun OnboardingScreenLastPreview() {
+    MoodTrackerTheme(dynamicColor = false) {
+        OnboardingContent(onFinish = {}, initialPage = 2)
+    }
+}
+
+@Preview(name = "Screen -dark", showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun OnboardingScreenDarkPreview() {
+    MoodTrackerTheme(dynamicColor = false) {
+        OnboardingContent(onFinish = {}, initialPage = 1)
     }
 }
