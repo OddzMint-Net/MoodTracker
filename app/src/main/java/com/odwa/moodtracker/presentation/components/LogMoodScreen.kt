@@ -4,8 +4,6 @@
  */
 package com.odwa.moodtracker.presentation.components
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -13,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.odwa.moodtracker.presentation.viewmodel.LogMoodViewModel
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun LogMoodScreen(
     modifier: Modifier = Modifier,

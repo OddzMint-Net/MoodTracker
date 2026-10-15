@@ -5,8 +5,6 @@
 package com.odwa.moodtracker.presentation.components
 
 import android.content.res.Configuration
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,7 +27,6 @@ import com.odwa.moodtracker.ui.preview.MoodTrackerAppPreview
 import com.odwa.moodtracker.util.toReadableDateTime
 import com.odwa.moodtracker.util.toShortDayLabel
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MoodHistoryItem(
     entry: LoggedMood,
@@ -64,7 +61,6 @@ fun MoodHistoryItem(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true, name = "Happy")
 @Composable
 private fun MoodHistoryItemHappyPreview() {
@@ -79,7 +75,6 @@ private fun MoodHistoryItemHappyPreview() {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true, name = "Strip of five")
 @Composable
 private fun MoodHistoryItemStripPreview() {
@@ -105,7 +100,6 @@ private fun MoodHistoryItemStripPreview() {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true, name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun MoodHistoryItemDarkPreview() {

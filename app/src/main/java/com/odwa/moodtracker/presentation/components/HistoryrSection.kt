@@ -7,26 +7,11 @@ package com.odwa.moodtracker.presentation.components
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,7 +26,6 @@ import com.odwa.moodtracker.ui.preview.MoodTrackerAppPreview
 
 private const val HISTORY_PREVIEW_COUNT = 5
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HistorySection(
     history: List<LoggedMood>,
@@ -104,7 +88,6 @@ fun HistorySection(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true, name = "Five entries")
 @Composable
 private fun HistorySectionFullPreview() {
@@ -125,7 +108,6 @@ private fun HistorySectionFullPreview() {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true, name = "Empty")
 @Composable
 private fun HistorySectionEmptyPreview() {

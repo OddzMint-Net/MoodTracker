@@ -5,8 +5,6 @@
 package com.odwa.moodtracker.presentation.components
 
 import android.content.res.Configuration
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -22,7 +20,6 @@ import com.odwa.moodtracker.domain.model.LoggedMood
 import com.odwa.moodtracker.domain.model.Mood
 import com.odwa.moodtracker.ui.preview.MoodTrackerAppPreview
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun LogMoodContent(
     selectedMood: Mood?,
@@ -83,7 +80,6 @@ fun LogMoodContent(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true, name = "Empty state", device = "spec:width=1080px,height=1920px,dpi=440")
 @Composable
 private fun LogMoodContentEmptyPreview() {
@@ -103,7 +99,6 @@ private fun LogMoodContentEmptyPreview() {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true, name = "Loading support message", device = "spec:width=1080px,height=1920px,dpi=440")
 @Composable
 private fun LogMoodContentLoadingPreview() {
@@ -123,7 +118,6 @@ private fun LogMoodContentLoadingPreview() {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true, name = "Full - message and history", device = "spec:width=1080px,height=1920px,dpi=440")
 @Composable
 private fun LogMoodContentFullPreview() {
@@ -152,7 +146,6 @@ private fun LogMoodContentFullPreview() {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(
     showBackground = true,
     name = "Dark",
